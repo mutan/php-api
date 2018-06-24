@@ -1,0 +1,10 @@
+{
+    "name": "akim/php-api",
+    "authors": [
+        {
+            "name": "Akim S. Gubanov",
+            "email": "akim_now@mail.ru"
+        }
+    ],
+    "require": {}
+}
