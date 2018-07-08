@@ -1,10 +1,25 @@
 <?php
 
-$config = require_once('config.php');
+require __DIR__ . '/vendor/autoload.php';
 
-$pdo = new PDO(
-    "mysql:host=" . $config['database']['host'] . ";dbname=" . $config['database']['dbname'],
-    $config['database']['user'],
-    $config['database']['password']
-);
+/* PHP dotenv library. Loads environment variables from .env to getenv() */
+$dotenv = new Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+$dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER'])->notEmpty();
+$dotenv->required(['DB_PASSWORD']);
 
+
+/* DB examples */
+
+$posts = App\DB::run("SELECT title FROM posts")->fetchAll();
+
+foreach ($posts as $post) {
+    echo $post->title . "<br>";
+}
+
+$post = App\DB::run(
+    "SELECT * FROM posts WHERE id = :id",
+    ['id' => 1]
+)->fetch();
+
+echo "<br><br>" . $post->author . "<br>" . $post->title . "<br>" . $post->body . "<br>";
