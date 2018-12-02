@@ -11,6 +11,8 @@ $dotenv->required(['DB_PASSWORD']);
 
 /* DB examples */
 
+// http://phpfaq.ru/pdo/pdo_wrapper
+
 $posts = App\DB::run("SELECT title FROM posts")->fetchAll();
 
 foreach ($posts as $post) {
